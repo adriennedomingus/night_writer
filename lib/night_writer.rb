@@ -9,7 +9,7 @@ class NightWriter
   end
 
   def write_phrase(message)
-    new_message = message.chars
+    new_message = shift_character(message)
     braille_characters = write_character(new_message[0])
     new_message.shift
     new_message.each do |character|
@@ -21,6 +21,20 @@ class NightWriter
     braille_characters
   end
 
+  def shift_character(message)
+    new_message = message.chars # => ['b', 'a', 'D', 'l', 'y']
+    shifted_message = []
+    new_message.each do |character|
+      if character == character.upcase
+        shifted_message << "shift"
+        shifted_message << character.downcase
+      else
+        shifted_message << character
+      end
+    end
+    shifted_message
+  end
+
   def night_write(message)
     message = write_phrase(message)
     message[0] += "\n"
@@ -28,6 +42,7 @@ class NightWriter
     message[2] += "\n"
     message.join
   end
+
 end
 
 if __FILE__ == $PROGRAM_NAME

@@ -40,6 +40,20 @@ class NightWriterTest < MiniTest::Test
     assert_equal result, n.write_phrase("badly")
   end
 
+  def test_it_adds_shift_character_to_message
+    n = NightWriter.new
+    result = ["b", "a", "shift", "d", "l", "y"]
+
+    assert_equal result, n.shift_character("baDly")
+  end
+
+  def test_it_adds_translated_shift_character_to_capital_letters
+    n = NightWriter.new
+    result = ["0.0...000.00", "0......00..0", ".....0..0.00"]
+
+    assert_equal result, n.write_phrase("baDly")
+  end
+
   def test_it_adds_newline_character
     n = NightWriter.new
     result = "0.0.000.00\n0....00..0\n......0.00\n"
