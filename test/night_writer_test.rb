@@ -39,4 +39,11 @@ class NightWriterTest < MiniTest::Test
 
     assert_equal result, n.write_phrase("badly")
   end
+
+  def test_it_adds_newline_character
+    n = NightWriter.new
+    result = "0.0.000.00\n0....00..0\n......0.00\n"
+
+    assert_equal result, n.night_write("badly")
+  end
 end

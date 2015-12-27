@@ -20,4 +20,20 @@ class NightWriter
     end
     braille_characters
   end
+
+  def night_write(message)
+    message = write_phrase(message)
+    message[0] += "\n"
+    message[1] += "\n"
+    message[2] += "\n"
+    message.join
+  end
+end
+
+if __FILE__ == $PROGRAM_NAME
+  message = File.read(ARGV[0]).chomp
+  n = NightWriter.new
+  translated = n.night_write(message)
+  f = File.new(ARGV[1], 'w')
+  f.write(translated)
 end
