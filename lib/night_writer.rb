@@ -14,18 +14,19 @@ class NightWriter
     new_message.shift
     new_message.each do |character|
       @next = write_character(character)
-      braille_characters[0] += @next[0]
-      braille_characters[1] += @next[1]
-      braille_characters[2] += @next[2]
+      braille_characters.each_with_index do |character, index|
+        braille_characters[index] += @next[index]
+      end
     end
     braille_characters
   end
 
   def shift_character(message)
-    new_message = message.chars # => ['b', 'a', 'D', 'l', 'y']
+    new_message = message.chars
     shifted_message = []
+    letters = ("A".."Z").to_a
     new_message.each do |character|
-      if character == character.upcase
+      if letters.include?(character)
         shifted_message << "shift"
         shifted_message << character.downcase
       else
@@ -37,9 +38,9 @@ class NightWriter
 
   def night_write(message)
     message = write_phrase(message)
-    message[0] += "\n"
-    message[1] += "\n"
-    message[2] += "\n"
+    message.map! do |line|
+      line += "\n"
+    end
     message.join
   end
 
