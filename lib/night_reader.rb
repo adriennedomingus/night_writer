@@ -20,11 +20,22 @@ class NightReader
   end
 
   def translate_message(message)
-    new_message = map_characters(message)
+    new_message = shift_to_capital(message)
     new_message.map! do |character|
-      character = BRAILLE[[character]]
+      character = BRAILLE[[character]] || character
     end
     new_message.join
+  end
+
+  def shift_to_capital(message)
+    new_message = map_characters(message)
+    new_message.each_with_index do |character, index|
+      if character == ".....0"
+        new_message.delete_at(index)
+        new_message[index] = BRAILLE[[new_message[index]]].upcase
+      end
+    end
+    new_message
   end
 end
 

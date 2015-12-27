@@ -26,4 +26,18 @@ class NightReaderTest < MiniTest::Test
 
     assert_equal result, n.translate_message("0...000..0.00.000.\n.......00.0...00.0\n....0...0.0.......")
   end
+
+  def test_shift_character_makes_next_capital
+    n = NightReader.new
+    result = "a Message"
+
+    assert_equal result, n.translate_message("0.....000..0.00.000.\n.........00.0...00.0\n.....00...0.0.......")
+  end
+
+  def test_with_two_capital_letters
+    n = NightReader.new
+    result = "a MessagE"
+
+    assert_equal result, n.translate_message("0.....000..0.00.00..0.\n.........00.0...00...0\n.....00...0.0......0..")
+  end
 end
