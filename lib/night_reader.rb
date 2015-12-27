@@ -27,3 +27,11 @@ class NightReader
     new_message.join
   end
 end
+
+if __FILE__ == $PROGRAM_NAME
+  message = File.read(ARGV[0]).chomp
+  n = NightReader.new
+  translated = n.translate_message(message)
+  f = File.new(ARGV[1], 'w')
+  f.write(translated)
+end
