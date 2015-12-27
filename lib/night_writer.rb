@@ -44,12 +44,22 @@ class NightWriter
     message.join
   end
 
+  def count_characters(message)
+    count = 0
+    message.chars.each do
+      count += 1
+    end
+    count
+  end
+
 end
 
 if __FILE__ == $PROGRAM_NAME
   message = File.read(ARGV[0]).chomp
   n = NightWriter.new
+  count = n.count_characters(message)
   translated = n.night_write(message)
   f = File.new(ARGV[1], 'w')
   f.write(translated)
+  puts "Created '#{ARGV[1]}' containing #{count} characters"
 end
