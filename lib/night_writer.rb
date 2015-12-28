@@ -23,35 +23,18 @@ class NightWriter
 
   def shift_character(message)
     new_message = message.chars
-    shifted_message = []
     letters = ("A".."Z").to_a
-    new_message.each do |character|
-      if letters.include?(character)
-        shifted_message << "shift"
-        shifted_message << character.downcase
-      else
-        shifted_message << character
-      end
-    end
-    shifted_message
+    new_message.map! do |character|
+      letters.include?(character) ? "shift #{character.downcase}".split : character
+    end.flatten
   end
 
   def night_write(message)
     message = write_phrase(message)
     message.map! do |line|
       line += "\n"
-    end
-    message.join
+    end.join
   end
-
-  def count_characters(message)
-    count = 0
-    message.chars.each do
-      count += 1
-    end
-    count
-  end
-
 end
 
 if __FILE__ == $PROGRAM_NAME

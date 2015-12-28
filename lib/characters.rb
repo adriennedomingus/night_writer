@@ -73,4 +73,12 @@ module Characters
     ["......"] => " ",
     [".....0"] => "shift"
   }
+
+  def count_characters(message)
+    count = 0
+    message.chars.each do
+      count += 1
+    end
+    count
+  end
 end
